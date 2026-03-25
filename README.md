@@ -1,10 +1,8 @@
 <div align="center">
 
-<!-- ANIMATED HEADER -->
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f172a,50:1e3a5f,100:0ea5e9&height=200&section=header&text=Piyush%20Nikam&fontSize=52&fontColor=e0f2fe&fontAlignY=38&desc=AI%20%7C%20Autonomous%20Systems%20%7C%20Embedded%20Engineering&descAlignY=58&descColor=7dd3fc&animation=fadeIn" width="100%"/>
 
-<!-- TYPING ANIMATION -->
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=3000&pause=800&color=0EA5E9&center=true&vCenter=true&width=700&lines=M.Eng.+AI+Engineering+of+Autonomous+Systems+%40+THI+%F0%9F%87%A9%F0%9F%87%AA;3%2B+Years+in+Automotive+Electrical+%26+Industrial+Automation;Embedded+AI+%7C+CAN+Bus+%7C+Wiring+Harness+%7C+DFMEA;From+Defence+Vehicles+to+Formula+Student+Electric+%F0%9F%8F%8E%EF%B8%8F)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=3000&pause=800&color=0EA5E9&center=true&vCenter=true&width=700&lines=M.Eng.+AI+Engineering+of+Autonomous+Systems+%40+THI+%F0%9F%87%A9%F0%9F%87%AA;3%2B+Years+in+Automotive+Electrical+%26+Industrial+Automation;Embedded+AI+%7C+CAN+Bus+%7C+Wiring+Harness+%7C+DFMEA;From+Defence+Vehicles+to+Formula+Student+Electric+%F0%9F%8F%8E%EF%B8%8F)](https://git.io/typing-svg)
 
 <br/>
 
@@ -28,8 +26,19 @@ I work at the intersection of hardware and software — from CAN bus architectur
 
 - 🎓 **Education:** M.Eng. AI Engineering of Autonomous Systems — TH Ingolstadt (2025–present) · B.Tech Electrical Engineering — DBATU, 9.4/10, Dept. Rank 1 all 4 years
 - 🏢 **Experience:** Design Engineer @ Tata Technologies (Tata Motors project) · Intern @ Bajaj Auto Advanced Technology & Automation
+- 🏎️ **Currently:** Wiring harness design engineer on **Schanzer Racing Electric (SRe26)** Formula Student team
 - 🌐 **Languages:** English C1 · Deutsch A2 (actively improving)
 - 📬 **Open to:** Working student roles · internships · thesis projects in autonomous systems, embedded AI, and automotive engineering
+
+---
+
+## 🎮 While you're here — play a game
+
+<div align="center">
+
+[![Play Memory Match](https://img.shields.io/badge/🎮_Play_Memory_Match-Takes_60_seconds-0ea5e9?style=for-the-badge)](https://piyushnikam.github.io/game)
+
+</div>
 
 ---
 
@@ -121,7 +130,7 @@ Software:   Home Assistant · Python · YAML
 ### ⚡ Wireless Remote I/O — Bajaj Auto
 > *Advanced Technology & Automation Internship · 2022*
 
-Identified a high-cost inter-PLC communication problem and delivered a custom wireless remote I/O system at **7% of the market alternative cost**. Solution was appreciated by the plant head.
+Identified a high-cost inter-PLC communication problem and delivered a custom wireless remote I/O system at **7% of the market alternative cost**. Appreciated by the plant head.
 
 `PLC` `Ladder Logic` `RF Modules` `Industrial Automation`
 
