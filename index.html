@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Memory Match — Piyush Nikam</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0d1117;color:#e6edf3;font-family:'JetBrains Mono',monospace;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.wrap{width:100%;max-width:480px;padding:28px 20px}
+.eyebrow{font-size:10px;color:#8b949e;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
+h1{font-size:24px;font-weight:600;margin-bottom:4px}
+.sub{font-size:12px;color:#8b949e;margin-bottom:22px}
+.scorebar{display:flex;gap:10px;margin-bottom:18px}
+.sc{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:7px 14px;font-size:10px;color:#8b949e;flex:1;text-align:center}
+.sc span{display:block;font-size:20px;font-weight:600;color:#e6edf3;margin-top:2px}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.card{aspect-ratio:1;border-radius:8px;border:1px solid #30363d;background:#161b22;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:28px;transition:border-color .15s,background .15s;user-select:none}
+.card:hover:not(.matched):not(.flipped){border-color:#58a6ff;background:#21262d}
+.card.flipped{background:#21262d;border-color:#58a6ff}
+.card.matched{background:#3fb95015;border-color:#3fb950;cursor:default}
+.card.wrong{background:#f8514915;border-color:#f85149;animation:shake .3s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.msg{font-size:12px;color:#8b949e;height:18px;margin-bottom:14px;text-align:center}
+.actions{display:flex;gap:10px;align-items:center}
+.btn{padding:8px 20px;border-radius:5px;border:1px solid #58a6ff;background:#58a6ff15;color:#58a6ff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s}
+.btn:hover{background:#58a6ff28}
+.btn-ghost{border-color:#30363d;background:transparent;color:#8b949e}
+.btn-ghost:hover{border-color:#8b949e;color:#e6edf3;background:transparent}
+.end-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:32px 24px;text-align:center}
+.end-emoji{font-size:48px;margin-bottom:12px}
+.end-score{font-size:28px;font-weight:600;margin-bottom:4px}
+.end-label{font-size:12px;color:#8b949e;margin-bottom:6px}
+.end-grade{font-size:13px;font-weight:600;margin-bottom:22px}
+.divider{height:1px;background:#30363d;margin:20px 0}
+.footer{font-size:11px;color:#8b949e;text-align:center;margin-top:18px;line-height:1.8}
+.footer a{color:#58a6ff;text-decoration:none}
+.footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap" id="root"></div>
+<script>
+const EMOJIS = ['🚀','🔧','🤖','⚡','🎯','🏎️','🧠','💡'];
+let cards=[], flipped=[], matched=new Set(), moves=0, waiting=false, elapsed=0, startTime=null, timer=null;
+
+function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
+
+function init(){
+  cards=shuffle([...EMOJIS,...EMOJIS]).map((e,i)=>({id:i,emoji:e,show:false}));
+  flipped=[];matched=new Set();moves=0;waiting=false;elapsed=0;
+  clearInterval(timer);startTime=null;timer=null;
+  render();
+}
+
+function flip(id){
+  if(waiting)return;
+  const c=cards[id];
+  if(c.show||matched.has(id)||flipped.length===2)return;
+  if(!startTime){startTime=Date.now();timer=setInterval(()=>{elapsed=Math.floor((Date.now()-startTime)/1000);render();},1000);}
+  c.show=true;
+  flipped.push(id);
+  if(flipped.length===2){
+    moves++;
+    const[a,b]=flipped;
+    if(cards[a].emoji===cards[b].emoji){
+      matched.add(a);matched.add(b);flipped=[];
+      if(matched.size===cards.length)clearInterval(timer);
+    }else{
+      waiting=true;
+      setTimeout(()=>{cards[a].show=false;cards[b].show=false;flipped=[];waiting=false;render();},650);
+    }
+  }
+  render();
+}
+
+function fmt(s){return`${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`}
+
+function grade(){
+  if(moves<=14)return{text:'Perfect memory! 🧠',color:'#3fb950'};
+  if(moves<=20)return{text:'Sharp! 🎯',color:'#58a6ff'};
+  if(moves<=28)return{text:'Not bad! 👍',color:'#d29922'};
+  return{text:'Keep practicing 😄',color:'#8b949e'};
+}
+
+function render(){
+  const root=document.getElementById('root');
+  const done=cards.length>0&&matched.size===cards.length;
+
+  if(done){
+    const g=grade();
+    root.innerHTML=`
+      <div class="eyebrow">piyush nikam // profile game</div>
+      <div class="end-card">
+        <div class="end-emoji">🎉</div>
+        <div class="end-score">${moves} moves</div>
+        <div class="end-label">${fmt(elapsed)} · ${EMOJIS.length}/${EMOJIS.length} pairs found</div>
+        <div class="end-grade" style="color:${g.color}">${g.text}</div>
+        <button class="btn" onclick="init()">Play again</button>
+        <div class="divider"></div>
+        <div style="font-size:12px;color:#8b949e;margin-bottom:12px">Enjoyed it? Let's connect.</div>
+        <a href="https://linkedin.com/in/piyush-nikam" style="display:inline-block;padding:8px 20px;border-radius:5px;border:1px solid #0077b5;background:#0077b515;color:#58a6ff;font-size:12px;font-weight:600;text-decoration:none;font-family:'JetBrains Mono',monospace">Connect on LinkedIn →</a>
+      </div>
+      <div class="footer">Built by <a href="https://linkedin.com/in/piyush-nikam">Piyush Nikam</a></div>`;
+    return;
+  }
+
+  let msg='';
+  if(flipped.length===2){
+    const[a,b]=flipped;
+    msg=cards[a].emoji===cards[b].emoji?'Match! ✓':'No match, try again...';
+  }
+
+  root.innerHTML=`
+    <div class="eyebrow">piyush nikam // profile game</div>
+    <h1>Memory Match</h1>
+    <div class="sub">Flip cards · find all 8 pairs · fewest moves wins</div>
+    <div class="scorebar">
+      <div class="sc">Moves<span>${moves}</span></div>
+      <div class="sc">Pairs<span>${matched.size/2}/${EMOJIS.length}</span></div>
+      <div class="sc">Time<span>${fmt(elapsed)}</span></div>
+    </div>
+    <div class="board">
+      ${cards.map(c=>{
+        const isWrong=flipped.length===2&&flipped.includes(c.id)&&cards[flipped[0]].emoji!==cards[flipped[1]].emoji;
+        const cls=matched.has(c.id)?'matched':c.show?(isWrong?'wrong':'flipped'):'';
+        return`<div class="card ${cls}" onclick="flip(${c.id})">${c.show||matched.has(c.id)?c.emoji:''}</div>`;
+      }).join('')}
+    </div>
+    <div class="msg">${msg}</div>
+    <div class="actions">
+      <button class="btn" onclick="init()">Restart</button>
+      <a href="https://linkedin.com/in/piyush-nikam" style="font-size:11px;color:#8b949e;text-decoration:none;margin-left:auto">by Piyush Nikam →</a>
+    </div>`;
+}
+init();
+</script>
+</body>
+</html>
