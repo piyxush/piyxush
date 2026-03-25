@@ -36,7 +36,7 @@ I work at the intersection of hardware and software — from CAN bus architectur
 
 <div align="center">
 
-[![Play Memory Match](https://img.shields.io/badge/🎮_Play_Memory_Match-Takes_60_seconds-0ea5e9?style=for-the-badge)](https://piyushnikam.github.io/game)
+[![Play Memory Match](https://img.shields.io/badge/🎮_Play_Memory_Match-Takes_60_seconds-0ea5e9?style=for-the-badge)](https://piyxush.github.io/piyxush/)
 
 </div>
 
