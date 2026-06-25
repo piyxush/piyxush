@@ -27,7 +27,7 @@ I work at the intersection of hardware and software — from CAN bus architectur
 - 🎓 **Education:** M.Eng. AI Engineering of Autonomous Systems — TH Ingolstadt (2025–present) · B.Tech Electrical Engineering — DBATU, 9.4/10, Dept. Rank 1 all 4 years
 - 🏢 **Experience:** Design Engineer @ Tata Technologies (Tata Motors project) · Intern @ Bajaj Auto Advanced Technology & Automation
 - 🏎️ **Currently:** Wiring harness design engineer on **Schanzer Racing Electric (SRe26)** Formula Student team
-- 🌐 **Languages:** English C1 · Deutsch A2 (actively improving)
+- 🌐 **Languages:** English C1 · Deutsch B1 (actively improving)
 - 📬 **Open to:** Working student roles · internships · thesis projects in autonomous systems, embedded AI, and automotive engineering
 
 ---
